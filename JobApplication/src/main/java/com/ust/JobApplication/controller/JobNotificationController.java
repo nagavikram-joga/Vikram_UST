@@ -1,6 +1,6 @@
 package com.ust.JobApplication.controller;
 
-import com.ust.JobApplication.model.JobNotification;
+import com.ust.JobApplication.model.JobInfo;
 import com.ust.JobApplication.service.JobNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,19 +14,29 @@ public class JobNotificationController {
     private JobNotificationService jobNotificationService;
 
     @PostMapping("/addjob")
-    public JobNotification addJob(@RequestBody JobNotification jobNotification)
+    public JobInfo addJob(@RequestBody JobInfo jobInfo)
     {
-        return jobNotificationService.addJob(jobNotification);
+        return jobNotificationService.addJob(jobInfo);
     }
 
-    @GetMapping("/jobs")
-    public List<JobNotification> getJobs()
+    @GetMapping("/alljobs")
+    public List<JobInfo> getAllJobs()
     {
-        return jobNotificationService.getJobs();
+        return jobNotificationService.getAllJobs();
     }
-    @GetMapping("/jobs/{id}")
-    public JobNotification getJobById(@PathVariable long id)
+    @GetMapping("/alljobs/{id}")
+    public JobInfo getJobById(@PathVariable long id)
     {
         return jobNotificationService.getJobById(id);
     }
+
+    @PutMapping("/updatejob/{id}")
+    public JobInfo updatetrainer(@PathVariable Long id, @RequestBody JobInfo jobInfo){
+        return jobNotificationService.updateJob(id,jobInfo);
+    }
+    @DeleteMapping("/deletejob/{id}")
+    public String deletetrainer(@PathVariable Long id){
+        return jobNotificationService.deletetrainer(id);
+    }
+
 }
