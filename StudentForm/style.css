@@ -21,6 +21,7 @@ h1 {
   display: block;
   min-width: 12%;
   align-self: flex-start;
+  font-weight: 799;
 }
 #formName {
   display: block;
@@ -35,11 +36,11 @@ h1 {
 .form-group {
   display: block;
   width: 90%;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 label {
   display: block;
-  margin-top: 5px;
+  margin-bottom: 5px;
   color: #333;
 }
 input[type="text"],
@@ -106,6 +107,7 @@ th {
   align-items: center;
   font-size: auto;
   justify-content: center;
+  
 }
 td:nth-child(4) {
   display: flex;
