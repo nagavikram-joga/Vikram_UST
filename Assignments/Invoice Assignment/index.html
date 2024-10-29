@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice Generator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="invoiceForm">
+        <h1>Invoice Generator</h1>
+
+        <!-- Invoice Name -->
+        <div class="form-group">
+          <label for="invoiceName">Invoice Name:</label>
+          <input type="text" id="invoiceName" required />
+        </div>
+
+        <!-- Invoice Number and Date -->
+        <div class="form-header">
+          <div class="form-group">
+            <label for="invoiceNo">Invoice No:</label>
+            <input type="text" id="invoiceNo" required />
+          </div>
+          <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" required />
+          </div>
+        </div>
+
+        <!-- Company Details -->
+        <div class="details-box">
+          <h3>Company Details</h3>
+
+          <label for="companyName">Company Name:</label>
+          <input type="text" id="companyName" required />
+
+          <label for="companyAddress">Company Address:</label>
+          <input type="text" id="companyAddress" required />
+
+          <label for="trainerName">Trainer Name:</label>
+          <input type="text" id="trainerName" required />
+
+          <label for="trainerContact">Trainer Contact:</label>
+          <input type="text" id="trainerContact" required />
+        </div>
+
+        <!-- Service Details -->
+        <div class="details-box">
+          <h3>Service Details</h3>
+          <div id="serviceDetailsContainer">
+            <div class="form-row service-details-entry">
+              <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" name="description" required />
+              </div>
+              <div class="form-group">
+                <label for="rateType">Rate Type:</label>
+                <select name="rateType" required>
+                  <option value="hourly">Hourly Rate</option>
+                  <option value="daily">Daily Rate</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="quantity">Number of Hours/Days:</label>
+                <input type="number" name="quantity" required />
+              </div>
+              <div class="form-group">
+                <label for="rate">Rate (INR):</label>
+                <input type="number" name="rate" required />
+              </div>
+            </div>
+          </div>
+          <button type="button" onclick="addServiceDetail()">
+            Add Another Service
+          </button>
+        </div>
+
+        <!-- Bank Details -->
+        <div class="details-box">
+          <h3>Bank Details</h3>
+          <div class="form-group">
+            <label for="bankName">Bank Name:</label>
+            <input type="text" id="bankName" required />
+          </div>
+          <div class="form-group">
+            <label for="accountHolderName">Account Holder Name:</label>
+            <input type="text" id="accountHolderName" required />
+          </div>
+          <div class="form-group">
+            <label for="accountNo">Account No:</label>
+            <input type="text" id="accountNo" required />
+          </div>
+          <div class="form-group">
+            <label for="ifscCode">IFSC Code:</label>
+            <input type="text" id="ifscCode" required />
+          </div>
+          <div class="form-group">
+            <label for="panNumber">PAN Number:</label>
+            <input type="text" id="panNumber" required />
+          </div>
+          <div class="form-group">
+            <label for="bankAddress">Bank Address:</label>
+            <input type="text" id="bankAddress" required />
+          </div>
+        </div>
+
+        <button type="submit">Generate Invoice</button>
+      </form>
+
+      <!-- Invoice Display -->
+      <div id="invoice" style="display: none">
+        <h2 id="displayInvoiceName"></h2>
+        <p><strong>Invoice No:</strong> <span id="displayInvoiceNo"></span></p>
+        <p><strong>Date:</strong> <span id="displayDate"></span></p>
+        <h3>Company Details</h3>
+        <p>
+          <strong>Company Name:</strong> <span id="displayCompanyName"></span>
+        </p>
+        <p>
+          <strong>Company Address:</strong>
+          <span id="displayCompanyAddress"></span>
+        </p>
+        <p>
+          <strong>Trainer Name:</strong> <span id="displayTrainerName"></span>
+        </p>
+        <p>
+          <strong>Trainer Contact:</strong>
+          <span id="displayTrainerContact"></span>
+        </p>
+        <h3>Service Details</h3>
+        <div id="displayServiceDetails"></div>
+        <h3>Bank Details</h3>
+        <p><strong>Bank Name:</strong> <span id="displayBankName"></span></p>
+        <p>
+          <strong>Account Holder Name:</strong>
+          <span id="displayAccountHolderName"></span>
+        </p>
+        <p><strong>Account No:</strong> <span id="displayAccountNo"></span></p>
+        <p><strong>IFSC Code:</strong> <span id="displayIfscCode"></span></p>
+        <p><strong>PAN Number:</strong> <span id="displayPanNumber"></span></p>
+        <p>
+          <strong>Bank Address:</strong> <span id="displayBankAddress"></span>
+        </p>
+
+        <button onclick="downloadInvoice()">Download Invoice</button>
+        <button onclick="editInvoice()">Edit Invoice</button>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
