@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scrollbar-width: 0;
 }
 
 body,
@@ -10,25 +11,6 @@ html {
   font-family: "Arial", sans-serif;
   scroll-behavior: smooth;
   color: #333;
-}
-
-/* Navigation */
-nav {
-  background: #222;
-  padding: 15px;
-  text-align: center;
-}
-
-nav a {
-  color: #fff;
-  margin: 0 15px;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: #ff6f61;
 }
 
 /* Hero Section */

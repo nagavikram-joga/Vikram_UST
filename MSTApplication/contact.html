@@ -4,16 +4,21 @@
     <meta charset="UTF-8" />
     <title>Contact Us - MST Technology</title>
     <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
   </head>
   <body>
     <!-- Navigation -->
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="services.html">Services</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
+    <nav class="navbar">
+      <div class="navbar-brand">MST Technology</div>
+      <button class="navbar-toggle" onclick="toggleNavbar()">&#9776;</button>
+      <div class="navbar-links" id="navbarLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </nav>
     <header>
       <h1>Contact Us</h1>
@@ -31,4 +36,5 @@
       <p>&copy; 2024 MST Technology</p>
     </footer>
   </body>
+  <script src="js/navbar.js"></script>
 </html>

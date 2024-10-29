@@ -1,4 +1,10 @@
 /* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: 0;
+}
 body {
   font-family: Arial, sans-serif;
   color: #333;
@@ -7,24 +13,7 @@ body {
   margin: 0;
 }
 
-/* Navigation */
-nav {
-  background: #222;
-  padding: 15px;
-  text-align: center;
-}
 
-nav a {
-  color: #fff;
-  margin: 0 15px;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: #ff6f61;
-}
 /* services.css */
 
 body {
@@ -33,8 +22,6 @@ body {
   padding: 0;
   background-color: #f4f4f4;
 }
-
-
 
 #services {
   width: 90%;
