@@ -1,4 +1,6 @@
-/* Reset */
+/* ============================================================================================================================*/
+/* Style */
+/* ================================================================================================================================*/
 * {
   margin: 0;
   padding: 0;
@@ -27,6 +29,7 @@ header.hero {
 }
 
 header.hero .hero-text h1 {
+  /* padding-top: 40%; */
   font-size: 3.5rem;
   margin-bottom: 20px;
 }
@@ -59,7 +62,7 @@ section {
 #services .service-detail,
 #portfolio .portfolio-item,
 #blog .blog-post,
-#testimonials .testimonials {
+#testimonials .testimonial {
   max-width: 300px;
   margin: 20px auto;
   padding: 20px;
@@ -98,34 +101,6 @@ form {
   max-width: 500px;
 }
 
-form input,
-form textarea,
-form button {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  font-size: 1rem;
-}
-
-form input,
-form textarea {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-form button {
-  background: #ff6f61;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-form button:hover {
-  background: #e0554e;
-}
-
 /* Footer */
 footer {
   background: #222;
@@ -140,18 +115,25 @@ footer {
   background-color: #f9f9f9;
 }
 
-#core-services h2 {
+#core-services h2,
+#client-testimonials h2 {
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
+/* =============================================================================================================================*/
+/* Responsive layout */
+/* ===================================================================================================================================*/
+
 /* Responsive Styling for Mobile Devices */
 @media (max-width: 768px) {
-  #services .service {
+  #services .service,
+  #testimonials .testimonial {
     flex: 1 1 100%; /* Takes 100% width for single-column stacking */
     display: block !important;
   }
-  #services {
+  #services,
+  #testimonials {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -159,26 +141,99 @@ footer {
   }
 }
 @media (min-width: 768px) {
-  #services.service {
+  #services.service,
+  #testimonials .testimonial {
     flex: 0 0 33.33%; /* Takes 33.33% width for 3-column stacking */
     display: block !important;
   }
-  #services {
+  #services,
+  #testimonials {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
   }
 }
-#testimonials {
-  background: #e9ecef;
-  padding: 30px;
-  text-align: center;
+
+/* =============================================================================================================================*/
+/* Animations */
+/* ===================================================================================================================================*/
+
+/* Initial hidden state */
+#core-services {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
+/* Animation effect when the section is in view */
+#core-services.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*-----------------------------------------what our clients say animation-------------------------------------------------------*/
+
+/* Slide-in keyframes animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px); /* Slide in from the right */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Initial state for testimonials */
 .testimonial {
-  background: white;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Initially hidden */
+  transform: translateX(100px); /* Position off-screen to the right */
+}
+
+/* Staggered animation delays for each testimonial */
+.testimonial:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.testimonial:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.testimonial:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+/*-----------------------------------------Hero text animation-------------------------------------------------------*/
+
+/* Slide-up keyframes animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px); /* Slide in from below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply the animation to hero-text elements directly */
+.hero-text h1,
+.hero-text p,
+.hero-text .cta-button {
+  opacity: 0; /* Initial opacity for the animation to begin */
+  transform: translateY(50px); /* Start position for slide-up */
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+/* Stagger the animation delay */
+.hero-text h1 {
+  animation-delay: 0.2s;
+}
+
+.hero-text p {
+  animation-delay: 0.4s;
+}
+
+.hero-text .cta-button {
+  animation-delay: 0.6s;
 }
