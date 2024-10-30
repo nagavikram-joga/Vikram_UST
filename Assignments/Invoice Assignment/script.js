@@ -14,39 +14,39 @@ function downloadInvoice() {
 function numberToWords(num) {
   const ones = [
     "",
-    "one",
-    "two",
-    "three",
-    "four",
-    "five",
-    "six",
-    "seven",
-    "eight",
-    "nine",
+    "One",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
   ];
   const tens = [
     "",
     "",
-    "twenty",
-    "thirty",
-    "forty",
-    "fifty",
-    "sixty",
-    "seventy",
-    "eighty",
-    "ninety",
+    "Twenty",
+    "Thirty",
+    "Forty",
+    "Fifty",
+    "Sixty",
+    "Seventy",
+    "Eighty",
+    "Ninety",
   ];
   const teens = [
-    "ten",
-    "eleven",
-    "twelve",
-    "thirteen",
-    "fourteen",
-    "fifteen",
-    "sixteen",
-    "seventeen",
-    "eighteen",
-    "nineteen",
+    "Ten",
+    "Eleven",
+    "Twelve",
+    "Thirteen",
+    "Fourteen",
+    "Fifteen",
+    "Sixteen",
+    "Seventeen",
+    "Eighteen",
+    "Nineteen",
   ];
 
   if (num < 10) return ones[num];
@@ -56,18 +56,18 @@ function numberToWords(num) {
   if (num < 1000)
     return (
       ones[Math.floor(num / 100)] +
-      " hundred" +
+      " Hundred" +
       (num % 100 ? " and " + numberToWords(num % 100) : "")
     );
   if (num < 100000)
     return (
       numberToWords(Math.floor(num / 1000)) +
-      " thousand" +
+      " Thousand" +
       (num % 1000 ? " " + numberToWords(num % 1000) : "")
     );
   return (
     numberToWords(Math.floor(num / 100000)) +
-    " lakh" +
+    " Lakh" +
     (num % 100000 ? " " + numberToWords(num % 100000) : "")
   );
 }
