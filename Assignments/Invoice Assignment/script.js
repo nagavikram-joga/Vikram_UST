@@ -80,10 +80,10 @@ document.getElementById("invoiceForm").addEventListener("submit", function (e) {
   const invoiceName = document.getElementById("invoiceName").value;
   const invoiceNo = document.getElementById("invoiceNo").value;
   const date = document.getElementById("date").value;
-  //   const clientName = document.getElementById("clientName").value;
-  //   const clientAddress = document.getElementById("clientAddress").value;
-  //   const clientContact = document.getElementById("clientContact").value;
-  //   const poNo = document.getElementById("poNo").value;
+  const clientName = document.getElementById("clientName").value;
+  const clientAddress = document.getElementById("clientAddress").value;
+  const clientContact = document.getElementById("clientContact").value;
+  const poNo = document.getElementById("poNo").value;
   const companyName = document.getElementById("companyName").value;
   const companyAddress = document.getElementById("companyAddress").value;
   const trainerName = document.getElementById("trainerName").value;
@@ -103,6 +103,28 @@ document.getElementById("invoiceForm").addEventListener("submit", function (e) {
     "displayServiceDetails"
   );
   serviceDetailsContainer.innerHTML = "";
+
+  // Create table structure
+  const tableHTML = `
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Rate</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody id="serviceDetailsBody">
+    </tbody>
+  </table>
+`;
+  serviceDetailsContainer.insertAdjacentHTML("beforeend", tableHTML);
+
+  // Select the table body
+  const tableBody = document.getElementById("serviceDetailsBody");
+
+  // Iterate over service entries
   document
     .querySelectorAll("#serviceDetailsContainer .service-details-entry")
     .forEach((entry) => {
@@ -116,31 +138,31 @@ document.getElementById("invoiceForm").addEventListener("submit", function (e) {
         parseFloat(entry.querySelector("input[name='rate']").value) || 0;
       const amount = quantity * rate;
 
-      // Update service entry in the invoice display
-      const serviceDetailHTML = `
-        <p><strong>Description:</strong> ${description}</p>
-        <p><strong>Rate Type:</strong> ${rateType}</p>
-        <p><strong>Quantity:</strong> ${quantity} ${
-        rateType === "hourly" ? "Hours" : "Days"
-      }</p>
-        <p><strong>Rate (INR):</strong> ${rate}</p>
-        <p><strong>Amount:</strong> ${amount}</p>
-      `;
-      serviceDetailsContainer.insertAdjacentHTML(
-        "beforeend",
-        serviceDetailHTML
-      );
+      // Create a new row for each service entry
+      const rowHTML = `
+    <tr>
+      <td>${description}</td>
+      <td>${quantity} ${rateType === "hourly" ? "hours" : "days"}</td>
+      <td>${rate}${rateType === "hourly" ? "/hour" : "/day"}</td>
+      <td>${amount}</td>
+    </tr>
+  `;
+
+      tableBody.insertAdjacentHTML("beforeend", rowHTML);
       totalAmount += amount;
     });
+
+  // tableBody.insertAdjacentHTML("beforeend", rowHTML);
+  // Update total amount in the invoice preview
 
   // Update main fields in the invoice preview
   document.getElementById("displayInvoiceName").textContent = invoiceName;
   document.getElementById("displayInvoiceNo").textContent = invoiceNo;
   document.getElementById("displayDate").textContent = date;
-  //   document.getElementById("displayClientName").textContent = clientName;
-  //   document.getElementById("displayClientAddress").textContent = clientAddress;
-  //   document.getElementById("displayClientContact").textContent = clientContact;
-  //   document.getElementById("displayPoNo").textContent = poNo;
+  document.getElementById("displayClientName").textContent = clientName;
+  document.getElementById("displayClientAddress").textContent = clientAddress;
+  document.getElementById("displayClientContact").textContent = clientContact;
+  document.getElementById("displayPoNo").textContent = poNo;
   document.getElementById("displayCompanyName").textContent = companyName;
   document.getElementById("displayCompanyAddress").textContent = companyAddress;
   document.getElementById("displayTrainerName").textContent = trainerName;
@@ -156,7 +178,7 @@ document.getElementById("invoiceForm").addEventListener("submit", function (e) {
   document.getElementById("displayBankAddress").textContent = bankAddress;
 
   // Display total amount and amount in words
-//   document.getElementById("displayAmount").textContent = totalAmount;
+  //   document.getElementById("displayAmount").textContent = totalAmount;
   document.getElementById("displayTotal").textContent = totalAmount;
   document.getElementById("displayAmountInWords").textContent =
     numberToWords(totalAmount) + " rupees only";
@@ -171,6 +193,10 @@ function editInvoice() {
   document.getElementById("invoiceForm").style.display = "block";
   document.getElementById("invoice").style.display = "none";
 }
+
+// function downloadInvoice() {
+//   document.getElementsByTagName("button").style.display = "none";
+// }
 
 // Function to add a new service entry dynamically
 function addServiceDetail() {
@@ -199,6 +225,34 @@ function addServiceDetail() {
         <label for="rate">Rate (INR):</label>
         <input type="number" name="rate" required>
       </div>
+      
     `;
   serviceDetailsContainer.appendChild(newServiceEntry);
+}
+
+function downloadInvoice() {
+  // Hide buttons during PDF generation
+  const downloadButton = document.querySelector(
+    'button[onclick="downloadInvoice()"]'
+  );
+  const editButton = document.querySelector('button[onclick="editInvoice()"]');
+  downloadButton.style.display = "none";
+  editButton.style.display = "none";
+
+  // Use html2pdf to generate the PDF
+  const invoiceElement = document.getElementById("invoice");
+  html2pdf()
+    .from(invoiceElement)
+    .set({
+      margin: [0.5, 0.5],
+      filename: "invoice.pdf",
+      jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+      html2canvas: { scale: 2, useCORS: true },
+    })
+    .save()
+    .then(() => {
+      // Restore buttons after the PDF is generated
+      downloadButton.style.display = "inline-block";
+      editButton.style.display = "inline-block";
+    });
 }

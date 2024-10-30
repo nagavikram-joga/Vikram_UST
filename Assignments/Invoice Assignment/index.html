@@ -28,6 +28,22 @@
             <input type="date" id="date" required />
           </div>
         </div>
+        <!-- Client Details -->
+        <div class="details-box">
+          <h3>Client Details</h3>
+
+          <label for="clientName">Client Name:</label>
+          <input type="text" id="clientName" required />
+
+          <label for="clientAddress">Client Address:</label>
+          <input type="text" id="clientAddress" required />
+
+          <label for="clientContact">Contact No:</label>
+          <input type="text" id="clientContact" required />
+
+          <label for="poNo">PO No:</label>
+          <input type="text" id="poNo" required />
+        </div>
 
         <!-- Company Details -->
         <div class="details-box">
@@ -112,8 +128,28 @@
       <!-- Invoice Display -->
       <div id="invoice" style="display: none">
         <h2 id="displayInvoiceName"></h2>
-        <p><strong>Invoice No:</strong> <span id="displayInvoiceNo"></span></p>
-        <p><strong>Date:</strong> <span id="displayDate"></span></p>
+        <p class="right">
+          <strong>Invoice No:</strong> <span id="displayInvoiceNo"></span>
+        </p>
+        <p class="right">
+          <strong>Date:</strong> <span id="displayDate"></span>
+        </p>
+        <h3>Client Details</h3>
+        <p>
+          <strong>Client Name:</strong> <span id="displayClientName"></span>
+        </p>
+        <p>
+          <strong>Client Address:</strong>
+          <span id="displayClientAddress"></span>
+        </p>
+        <p>
+          <strong>Client contact:</strong>
+          <span id="displayClientContact"></span>
+        </p>
+        <p>
+          <strong>PO No:</strong>
+          <span id="displayPoNo"></span>
+        </p>
         <h3>Company Details</h3>
         <p>
           <strong>Company Name:</strong> <span id="displayCompanyName"></span>
@@ -143,11 +179,14 @@
         <p>
           <strong>Bank Address:</strong> <span id="displayBankAddress"></span>
         </p>
+        <br />
         <p><strong>Total Amount:</strong> <span id="displayTotal"></span></p>
         <p>
           <strong>Total Amount in words:</strong>
           <span id="displayAmountInWords"></span>
         </p>
+        <br />
+        <p class="right">Signature</p>
 
         <button onclick="downloadInvoice()">Download Invoice</button>
         <button onclick="editInvoice()">Edit Invoice</button>
